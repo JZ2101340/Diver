@@ -1,0 +1,278 @@
+fileFormatVersion: 2
+guid: 166f14f058e3d6f40b64c09d710039d4
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pngtree-set-of-sea-creatures-on-white-background-vector-png-image_4501943_0
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 227
+        width: 108
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -123.801636, y: 48.3058}
+        - {x: -145.50143, y: 92.6167}
+        - {x: -157.35536, y: 149.54547}
+        - {x: -45.123962, y: 149.54544}
+        - {x: -51.20392, y: 110.70923}
+        - {x: -82.14875, y: 47.148773}
+      - - {x: 50.480316, y: 88.50687}
+        - {x: 15.619873, y: 118.88434}
+        - {x: 19.090927, y: 146.65292}
+        - {x: 98.96405, y: 171.12387}
+        - {x: 140.57858, y: 146.65292}
+        - {x: 142.31409, y: 85.33063}
+      - - {x: -89.4002, y: -139.13225}
+        - {x: -163.1405, y: -137.97522}
+        - {x: -175.28926, y: -92.85128}
+        - {x: -119.17355, y: -37.892548}
+        - {x: -15.619843, y: -54.09089}
+        - {x: -1.7355042, y: -112.52068}
+      - - {x: -3.1704254, y: -50.70659}
+        - {x: -53.80165, y: -37.314056}
+        - {x: -50.06819, y: 7.6189117}
+        - {x: -37.75418, y: 23.125198}
+        - {x: -37.603302, y: 84.17355}
+        - {x: -7.466446, y: 95.53598}
+        - {x: 20.826492, y: 87.64465}
+        - {x: 29.553253, y: 23.204437}
+        - {x: 37.51581, y: 0.06399536}
+        - {x: 43.388443, y: -43.099167}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fdd79c0e81408f4cbd3a4785ca70c78
+      internalID: 1440645920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-set-of-sea-creatures-on-white-background-vector-png-image_4501943_1
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 264
+        width: 121
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 1, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efb66e64163a40847bdf5dc4806f9183
+      internalID: 229236980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-set-of-sea-creatures-on-white-background-vector-png-image_4501943_2
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 132
+        width: 92
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed384983d23c5304cbfa8d54834c5895
+      internalID: 1651196559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-set-of-sea-creatures-on-white-background-vector-png-image_4501943_3
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 155
+        width: 125
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35755f5b2c1e914e89311af719615e2
+      internalID: 702545827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-set-of-sea-creatures-on-white-background-vector-png-image_4501943_4
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 42
+        width: 166
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3b4c3cacd8af674ab6241a2755455a9
+      internalID: -636714478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      pngtree-set-of-sea-creatures-on-white-background-vector-png-image_4501943_0: 1440645920
+      pngtree-set-of-sea-creatures-on-white-background-vector-png-image_4501943_1: 229236980
+      pngtree-set-of-sea-creatures-on-white-background-vector-png-image_4501943_2: 1651196559
+      pngtree-set-of-sea-creatures-on-white-background-vector-png-image_4501943_3: 702545827
+      pngtree-set-of-sea-creatures-on-white-background-vector-png-image_4501943_4: -636714478
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
