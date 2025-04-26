@@ -1,62 +1,84 @@
-using UnityEngine;
-using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class LeaderboardManager : MonoBehaviour
 {
-    public GameObject entryPrefab;
-    public Transform contentParent;
-    private string leaderboardUrl = "http://localhost:3000/leaderboard";
+    public Transform content;
+    public GameObject leaderboardEntryPrefab;
+    private string serverBaseUrl = "http://localhost:3000/leaderboard"; // Base URL
 
     [System.Serializable]
-    public class LeaderboardData
+    public class LeaderboardEntryData
     {
+        public int rank;
         public string username;
         public int total_score;
         public int time_taken;
-        public int rank;
     }
 
-    public void Start()
+    [System.Serializable]
+    public class LeaderboardEntriesList
     {
-        StartCoroutine(LoadLeaderboard());
+        public List<LeaderboardEntryData> entries;
     }
 
-    IEnumerator LoadLeaderboard()
+    private void Start()
     {
-        UnityWebRequest www = UnityWebRequest.Get(leaderboardUrl);
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            Debug.LogError("Failed to fetch leaderboard: " + www.error);
-            yield break;
-        }
-
-        LeaderboardData[] data = JsonHelper.FromJson<LeaderboardData>(www.downloadHandler.text);
-
-        foreach (LeaderboardData entry in data)
-        {
-            GameObject go = Instantiate(entryPrefab, contentParent);
-            go.GetComponent<LeaderboardEntry>().Initialize(entry.rank, entry.username, entry.total_score, entry.time_taken);
-        }
+        // Load default leaderboard at start, for example Easy
+        LoadLeaderboardForLevel("Easy");
     }
-    public static class JsonHelper
+
+    public void LoadLeaderboardForLevel(string levelName)
     {
-        public static T[] FromJson<T>(string json)
-        {
-            string newJson = "{ \"array\": " + json + "}";
-            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(newJson);
-            return wrapper.array;
-        }
+        StartCoroutine(LoadLeaderboard(levelName));
+    }
 
-        [System.Serializable]
-        private class Wrapper<T>
+    public IEnumerator LoadLeaderboard(string levelName)
+    {
+        string url = serverBaseUrl + "/" + levelName;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
         {
-            public T[] array;
+            string json = "{\"entries\":" + request.downloadHandler.text + "}";
+            LeaderboardEntriesList entriesList = JsonUtility.FromJson<LeaderboardEntriesList>(json);
+
+            PopulateLeaderboard(entriesList.entries);
+        }
+        else
+        {
+            Debug.LogError("Error fetching leaderboard: " + request.error);
         }
     }
 
+    private void PopulateLeaderboard(List<LeaderboardEntryData> leaderboardEntries)
+    {
+        foreach (Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var entry in leaderboardEntries)
+        {
+            GameObject newEntry = Instantiate(leaderboardEntryPrefab, content);
+            LeaderboardEntry entryScript = newEntry.GetComponent<LeaderboardEntry>();
+            if (entryScript != null)
+            {
+                string formattedTime = FormatTime(entry.time_taken);
+                entryScript.Setup(entry.rank, entry.username, entry.total_score, formattedTime);
+            }
+        }
+    }
+
+    private string FormatTime(int seconds)
+    {
+        int minutes = seconds / 60;
+        int remainingSeconds = seconds % 60;
+        return minutes.ToString("00") + ":" + remainingSeconds.ToString("00");
+    }
 }

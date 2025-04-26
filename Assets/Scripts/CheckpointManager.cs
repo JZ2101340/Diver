@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -96,6 +97,31 @@ public class CheckpointManager : MonoBehaviour
         compassArrow.localRotation = Quaternion.Euler(0, 0, angle);
     }
 
+    void UploadFinalScoreAndLoadScene(int nextSceneIndex)
+    {
+        int userId = int.Parse(NetworkManager.userId);
+        int finalScore = ScoreManager.Instance.GetScore();
+        int timeTakenInSeconds = Mathf.RoundToInt(TimerManager.Instance.GetTime());
+
+        Debug.Log($"Uploading Final Score: {finalScore}, Time: {timeTakenInSeconds}s");
+
+        LeaderboardUploader uploader = FindObjectOfType<LeaderboardUploader>();
+        if (uploader != null)
+        {
+            StartCoroutine(UploadAndLoad(uploader, userId, finalScore, timeTakenInSeconds, nextSceneIndex));
+        }
+        else
+        {
+            Debug.LogError("LeaderboardUploader not found!");
+        }
+    }
+    IEnumerator UploadAndLoad(LeaderboardUploader uploader, int userId, int finalScore, int timeTaken, int nextSceneIndex)
+    {
+        yield return uploader.UploadScore(userId, finalScore, timeTaken);
+
+        // After upload finishes, load the next scene
+        SceneManager.LoadScene(nextSceneIndex);
+    }
 
 
     void LoadNextScene()
@@ -104,20 +130,17 @@ public class CheckpointManager : MonoBehaviour
 
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
-            // ? Reset score and timer for the next level
-            if (ScoreManager.Instance != null)
-                ScoreManager.Instance.shouldReset = true;
-
-            if (TimerManager.Instance != null)
-                TimerManager.Instance.shouldReset = true;
-
-            SceneManager.LoadScene(nextSceneIndex);
+            UploadFinalScoreAndLoadScene(nextSceneIndex);
         }
         else
         {
             Debug.Log("? All levels complete.");
+            // You can load a "Game Completed" scene if you want
+            // SceneManager.LoadScene("LeaderboardScene");
         }
     }
+
+
 
     public void RestoreCheckpoint(int index)
     {
