@@ -11,7 +11,6 @@ public class OxygenManager : MonoBehaviour
     public GameObject gameOverPanel;
     public Button retryButton;
     public Button quitButton;
-
     private float maxOxygen = 100f;
     private float currentOxygen;
 
@@ -27,21 +26,19 @@ public class OxygenManager : MonoBehaviour
         {
             float restoredOxygen = PlayerPrefs.GetInt("oxygenLevel", 100);
             currentOxygen = restoredOxygen;
-            Debug.Log("??? Restored oxygen: " + currentOxygen);
+            Debug.Log("Restored oxygen: " + currentOxygen);
         }
         else
         {
             currentOxygen = maxOxygen;
-            Debug.Log("??? New game, oxygen reset to: " + currentOxygen);
+            Debug.Log("New game, oxygen reset to: " + currentOxygen);
         }
 
         oxygenSlider.maxValue = maxOxygen;
         oxygenSlider.value = currentOxygen;
 
-        // ? Reset timescale on level start
         Time.timeScale = 1f;
 
-        // ? Hook up buttons
         retryButton.onClick.AddListener(RestartGame);
         quitButton.onClick.AddListener(QuitToMainMenu);
 
@@ -56,7 +53,7 @@ public class OxygenManager : MonoBehaviour
         currentOxygen = Mathf.Max(0f, currentOxygen);
         oxygenSlider.value = currentOxygen;
 
-        ScoreManager.Instance.SetOxygenLevel(currentOxygen); // ? Ensure real-time score updates
+        ScoreManager.Instance.SetOxygenLevel(currentOxygen); 
 
         if (currentOxygen <= 0)
         {
@@ -86,9 +83,9 @@ public class OxygenManager : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("?? Game Over");
+        Debug.Log("Game Over");
         gameOverPanel.SetActive(true);
-        Time.timeScale = 0f; // ? Freeze the game
+        Time.timeScale = 0f; 
         SaveFinalProgress();
 
     }
@@ -113,12 +110,18 @@ public class OxygenManager : MonoBehaviour
             );
         }
     }
+    public void SetOxygenToMax()
+    {
+        currentOxygen = maxOxygen;
+        oxygenSlider.value = currentOxygen;
+        ScoreManager.Instance.SetOxygenLevel(currentOxygen);
+    }
 
 
     public void RestartGame()
     {
-        Debug.Log("?? Restarting level");
-        Time.timeScale = 1f; // ? Unpause time
+        Debug.Log("Restarting level");
+        Time.timeScale = 1f; 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
        
                                              
@@ -126,9 +129,9 @@ public class OxygenManager : MonoBehaviour
 
     void QuitToMainMenu()
     {
-        Debug.Log("?? Going to main menu");
+        Debug.Log("Going to main menu");
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Main menu (login)"); // ? Replace with actual main menu name
+        SceneManager.LoadScene("Main menu (login)"); 
     }
 
 

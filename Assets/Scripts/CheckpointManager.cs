@@ -5,16 +5,11 @@ using System.Collections;
 
 public class CheckpointManager : MonoBehaviour
 {
-
-    [Header("Setup")]
-    public Transform[] checkpoints;            // ?? Assign all checkpoint GameObjects
-    public Transform player;                   // ?? Assign the Diver
-    public RectTransform compassArrow;         // ?? Assign the UI compass arrow
-    public TMP_Text checkpointText;            // ?? Assign the UI text
-
-    [Header("Checkpoint Settings")]
-    public int totalCheckpoints;               // ?? Set manually (or use checkpoints.Length)
-
+    public Transform[] checkpoints;            
+    public Transform player;                   
+    public RectTransform compassArrow;         
+    public TMP_Text checkpointText;            
+    public int totalCheckpoints;               
     private int reachedCheckpoints = 0;
     private int currentCheckpointIndex = 0;
 
@@ -78,7 +73,7 @@ public class CheckpointManager : MonoBehaviour
     {
         for (int i = 0; i < checkpoints.Length; i++)
         {
-            checkpoints[i].gameObject.SetActive(i == index); // only next one active
+            checkpoints[i].gameObject.SetActive(i == index); 
         }
     }
 
@@ -87,13 +82,10 @@ public class CheckpointManager : MonoBehaviour
         if (compassArrow == null || player == null || currentCheckpointIndex >= checkpoints.Length)
             return;
 
-        // Get direction in world space
         Vector3 direction = checkpoints[currentCheckpointIndex].position - player.position;
 
-        // Convert to angle in Z (2D)
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Apply rotation on Z axis only
         compassArrow.localRotation = Quaternion.Euler(0, 0, angle);
     }
 
@@ -119,7 +111,6 @@ public class CheckpointManager : MonoBehaviour
     {
         yield return uploader.UploadScore(userId, finalScore, timeTaken);
 
-        // After upload finishes, load the next scene
         SceneManager.LoadScene(nextSceneIndex);
     }
 
@@ -134,9 +125,8 @@ public class CheckpointManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("? All levels complete.");
-            // You can load a "Game Completed" scene if you want
-            // SceneManager.LoadScene("LeaderboardScene");
+            Debug.Log(" All levels complete.");
+            
         }
     }
 
@@ -150,7 +140,6 @@ public class CheckpointManager : MonoBehaviour
         UpdateCheckpointUI();
     }
 
-    // Optional for other scripts
     public int GetReachedCheckpointCount()
     {
         return reachedCheckpoints;

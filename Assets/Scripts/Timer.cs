@@ -24,7 +24,7 @@ public class TimerManager : MonoBehaviour
         else
         {
             timeElapsed = PlayerPrefs.GetInt("timeTaken", 0);
-            Debug.Log("? Timer Restored: " + timeElapsed);
+            Debug.Log("Timer Restored: " + timeElapsed);
         }
     }
 

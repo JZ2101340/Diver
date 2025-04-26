@@ -1,176 +1,3 @@
-//using UnityEngine;
-//using UnityEngine.Networking;
-//using System.Collections;
-//using UnityEngine.UI;
-//using TMPro;
-//using UnityEngine.SceneManagement;
-
-//public class NetworkManager : MonoBehaviour
-//{
-//    private static NetworkManager _instance;//model
-//    private string serverUrl = "http://localhost:3000"; //model
-//    public TMP_InputField usernameInput;//view
-//    public TMP_InputField emailInput;//view
-//    public TMP_InputField passwordInput;//view
-//    public TextMeshProUGUI resultText;//view
-
-//    public string loggedInEmail;//model
-//    public static string userId;//model
-//    public string loggedInUserId;//model
-//    public bool isLoggedIn => !string.IsNullOrEmpty(userId);//model
-
-//    public class ProgressData //model
-//    {
-//        public string userId;
-//        public string level;
-//        public float oxygen;
-//        public float time;
-//        public int checkpoint;
-//        public int score;
-//    }
-//    public static NetworkManager Instance
-//    {
-//        get
-//        {
-//            if (_instance == null)
-//            {
-//                GameObject obj = new GameObject("NetworkManager");
-//                _instance = obj.AddComponent<NetworkManager>();
-//                DontDestroyOnLoad(obj);
-//            }
-//            return _instance;
-//        }
-//    }
-
-////controller
-//    public IEnumerator RegisterUser(string username, string email, string password, System.Action<string> callback)
-//    {
-//        string jsonData = $"{{\"username\":\"{username}\", \"email\":\"{email}\", \"password\":\"{password}\"}}";
-
-//        using (UnityWebRequest request = new UnityWebRequest(serverUrl + "/register", "POST"))
-//        {
-//            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-//            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-//            request.downloadHandler = new DownloadHandlerBuffer();
-//            request.SetRequestHeader("Content-Type", "application/json");
-
-//            yield return request.SendWebRequest();
-//            callback(request.result == UnityWebRequest.Result.Success ? request.downloadHandler.text : request.error);
-//        }
-//    }
-
-//    //model
-//    public class LoginResponse 
-//    {
-//        public string user_id;
-//    }
-
-//    //controller
-//    public IEnumerator LoginUser(string email, string password, System.Action<string> callback)
-//    {
-//        string jsonData = $"{{\"email\":\"{email}\", \"password\":\"{password}\"}}";
-
-//        using (UnityWebRequest request = new UnityWebRequest(serverUrl + "/login", "POST"))
-//        {
-//            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-//            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-//            request.downloadHandler = new DownloadHandlerBuffer();
-//            request.SetRequestHeader("Content-Type", "application/json");
-
-//            yield return request.SendWebRequest();
-
-//            if (request.result == UnityWebRequest.Result.Success)
-//            {
-//                string response = request.downloadHandler.text;
-
-//                var loginResponse = JsonUtility.FromJson<LoginResponse>(response);
-//                loggedInUserId = loginResponse.user_id;
-//                userId = loggedInUserId;
-
-//                callback(response);
-//            }
-//            else
-//            {
-//                callback(request.error); 
-//            }
-//        }
-//    }
-
-//    //controller
-//    public IEnumerator UpdateProgress(string level, float oxygen, float time, int checkpoint, int score)
-//    {
-//        string url = "http://localhost:3000/update-progress";  
-//        WWWForm form = new WWWForm();
-//        form.AddField("level", level);
-//        form.AddField("oxygen", oxygen.ToString());
-//        form.AddField("time", time.ToString());
-//        form.AddField("checkpoint", checkpoint);
-//        form.AddField("score", score);
-
-//        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
-//        {
-//            yield return www.SendWebRequest();
-
-//            if (www.isNetworkError || www.isHttpError)
-//            {
-//                Debug.LogError("Error: " + www.error);
-//            }
-//            else
-//            {
-//                Debug.Log("Progress update sent successfully!");
-//            }
-//        }
-//    }
-
-
-
-
-////controller
-//    public void RegisterUserButton()
-//    {
-//        string username = usernameInput.text;
-//        string email = emailInput.text;
-//        string password = passwordInput.text;
-
-//        StartCoroutine(RegisterUser(username, email, password, (response) =>
-//        {
-//            if (response.Contains("error"))
-//            {
-//                resultText.text = "Registration Failed: " + response;
-//            }
-//            else
-//            {
-//                resultText.text = "Registration Success";
-//                Debug.Log("Register Success: " + response);
-//                SceneManager.LoadScene("Main menu (register)"); 
-//            }
-//        }));
-//    }
-
-////controller
-//    public void LoginUserButton()
-//    {
-//        string email = emailInput.text;
-//        string password = passwordInput.text;
-
-//        StartCoroutine(LoginUser(email, password, (response) =>
-//        {
-//            if (response.Contains("error"))
-//            {
-//                resultText.text = "Login Failed: " + response;
-//            }
-//            else
-//            {
-//                loggedInEmail = email;
-//                resultText.text = "Login Success";
-//                Debug.Log("Login Success: " + response);
-//                SceneManager.LoadScene("Main menu (login)"); 
-//            }
-//        }));
-//    }
-//}
-//
-
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
@@ -180,7 +7,7 @@ using System.Collections;
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager _instance;
-    private string serverUrl = "http://localhost:3000"; // Update with your server URL
+    private string serverUrl = "http://localhost:3000"; 
     public TMP_InputField usernameInput;
     public TMP_InputField emailInput;
     public TMP_InputField passwordInput;
@@ -331,11 +158,11 @@ public class NetworkManager : MonoBehaviour
     {
         while (OxygenManager.Instance == null || ScoreManager.Instance == null || CheckpointManager.Instance == null || TimerManager.Instance == null)
         {
-            Debug.Log("? Waiting for managers to initialize...");
+            Debug.Log("Waiting for managers to initialize...");
             yield return new WaitForSeconds(1f);
         }
 
-        Debug.Log("? All managers ready. Starting live progress saving...");
+        Debug.Log("All managers ready. Starting live progress saving...");
 
         while (true)
         {
@@ -343,7 +170,7 @@ public class NetworkManager : MonoBehaviour
 
             if (isLoggedIn && System.Array.Exists(levelScenes, scene => scene == currentScene))
             {
-                Debug.Log("?? Saving Live Progress...");
+                Debug.Log("Saving Live Progress...");
 
                 yield return UpdateProgress(
                     currentScene,
@@ -355,7 +182,7 @@ public class NetworkManager : MonoBehaviour
             }
             else
             {
-                Debug.Log($"? Skipping progress save in non-level scene: {currentScene}");
+                Debug.Log("Skipping progress save in non-level scene: {currentScene}");
             }
 
             yield return new WaitForSeconds(3f);
@@ -369,31 +196,33 @@ public class NetworkManager : MonoBehaviour
     {
         string url = serverUrl + "/update-progress";
 
-        // Instead of WWWForm (because PUT doesn't naturally support it),
-        // we manually create form data encoded as a string
-        string formData = $"user_id={UnityWebRequest.EscapeURL(userId)}" +
-                          $"&current_level={UnityWebRequest.EscapeURL(level)}" +
-                          $"&checkpointsReached={lastCheckpoint}" +
-                          $"&oxygen_level={oxygen}" +
-                          $"&total_score={score}" +
-                          $"&time_taken={timeTaken}";
+        ProgressData data = new ProgressData
+        {
+            user_id = userId,
+            current_level = level,
+            checkpointsReached = lastCheckpoint,
+            oxygen_level = oxygen,
+            total_score = score,
+            time_taken = timeTaken
+        };
 
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(formData);
+        string jsonData = JsonUtility.ToJson(data);
 
         UnityWebRequest www = new UnityWebRequest(url, "PUT");
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
         www.uploadHandler = new UploadHandlerRaw(bodyRaw);
         www.downloadHandler = new DownloadHandlerBuffer();
-        www.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        www.SetRequestHeader("Content-Type", "application/json");
 
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log("? Progress saved successfully!");
+            Debug.Log("Progress saved successfully!");
         }
         else
         {
-            Debug.LogError("? Progress save failed: " + www.error);
+            Debug.LogError("Progress save failed: " + www.error);
         }
     }
 
@@ -410,8 +239,6 @@ public class NetworkManager : MonoBehaviour
                 Debug.LogWarning("ResultText UI is not set. Please log in first!");
         }
     }
-
-
 
 
     private void LoadProgress()
@@ -462,8 +289,8 @@ public class NetworkManager : MonoBehaviour
             PlayerPrefs.SetInt("totalScore", progress.total_score);
             PlayerPrefs.SetInt("timeTaken", progress.time_taken);
 
-            PlayerPrefs.Save(); // ? VERY IMPORTANT
-            Debug.Log("? Saved Progress to PlayerPrefs.");
+            PlayerPrefs.Save(); 
+            Debug.Log("Saved Progress to PlayerPrefs.");
 
             SceneManager.LoadScene(progress.current_level);
         }

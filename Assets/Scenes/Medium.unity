@@ -997,9 +997,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boosterPrefab: {fileID: 8781992256821108182, guid: 0ada114d47fd0eb4c8a5d81bfcadb1cd, type: 3}
   spawnInterval: 5
-  maxBoosters: 15
-  spawnAreaMin: {x: -8, y: -4}
-  spawnAreaMax: {x: 8, y: 4}
+  wallLeft: {fileID: 510442432}
+  wallRight: {fileID: 362453264}
+  wallTop: {fileID: 357587598}
+  wallBottom: {fileID: 588291521}
 --- !u!4 &332372142
 Transform:
   m_ObjectHideFlags: 0
@@ -3048,11 +3049,13 @@ MonoBehaviour:
   - {fileID: 1616728260162746778, guid: 9d7efbce11e0b6a4a9d56890551c3cca, type: 3}
   - {fileID: 6661781429658014564, guid: b93abfb36b8aa904792896d92389b3bb, type: 3}
   - {fileID: 3751956765968000565, guid: 0e2d584a438b70544a2c39156eb9a6e0, type: 3}
-  spawnAreaMin: {x: -40, y: -25}
-  spawnAreaMax: {x: 40, y: 25}
   numberOfCreatures: 6
   safeSpawnRadius: 3
   diverTransform: {fileID: 535924495}
+  wallLeft: {fileID: 510442432}
+  wallRight: {fileID: 362453264}
+  wallTop: {fileID: 357587598}
+  wallBottom: {fileID: 588291521}
 --- !u!4 &1175149232
 Transform:
   m_ObjectHideFlags: 0

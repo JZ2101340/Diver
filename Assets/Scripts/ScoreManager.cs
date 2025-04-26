@@ -5,7 +5,6 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
-    [Header("UI")]
     public TMP_Text scoreText;
 
     private float oxygenLevel = 100f;
@@ -30,7 +29,7 @@ public class ScoreManager : MonoBehaviour
             score = PlayerPrefs.GetInt("totalScore", 0);
             oxygenLevel = PlayerPrefs.GetInt("oxygenLevel", 100);
             PlayerPrefs.SetInt("restoreProgress", 0);
-            Debug.Log("? Score and Oxygen restored.");
+            Debug.Log("Score and Oxygen restored.");
         }
 
         UpdateScoreDisplay();
@@ -39,7 +38,7 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        UpdateScoreDisplay(); // ? Score live update
+        UpdateScoreDisplay(); 
     }
 
     public void SetOxygenLevel(float level)

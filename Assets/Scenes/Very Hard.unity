@@ -1159,9 +1159,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boosterPrefab: {fileID: 8781992256821108182, guid: 0ada114d47fd0eb4c8a5d81bfcadb1cd, type: 3}
   spawnInterval: 5
-  maxBoosters: 20
-  spawnAreaMin: {x: -8, y: -4}
-  spawnAreaMax: {x: 8, y: 4}
+  wallLeft: {fileID: 510442432}
+  wallRight: {fileID: 362453264}
+  wallTop: {fileID: 357587598}
+  wallBottom: {fileID: 588291521}
 --- !u!4 &332372142
 Transform:
   m_ObjectHideFlags: 0
@@ -3210,11 +3211,19 @@ MonoBehaviour:
   - {fileID: 8565426919105043431, guid: a7b28b53b38ab0c49bd13e50f5eb1333, type: 3}
   - {fileID: 6098136500320498923, guid: 7315a128319ef9c4da5ec24290481288, type: 3}
   - {fileID: 1616728260162746778, guid: 9d7efbce11e0b6a4a9d56890551c3cca, type: 3}
-  spawnAreaMin: {x: -40, y: -25}
-  spawnAreaMax: {x: 40, y: 25}
+  - {fileID: 3751956765968000565, guid: 0e2d584a438b70544a2c39156eb9a6e0, type: 3}
+  - {fileID: 6661781429658014564, guid: b93abfb36b8aa904792896d92389b3bb, type: 3}
+  - {fileID: 5369605275027527568, guid: 98349edfb91230b4d8be5808a878b18c, type: 3}
+  - {fileID: 2722512466004793310, guid: 48b005381307e9f4697dabfb4ba73366, type: 3}
+  - {fileID: 3710902377556567719, guid: a92cf418e9751e34f9b5eff8375eff8e, type: 3}
+  - {fileID: 6882463632854940556, guid: 2479e070b5673834aaca98f6db1d272f, type: 3}
   numberOfCreatures: 4
   safeSpawnRadius: 2
   diverTransform: {fileID: 535924495}
+  wallLeft: {fileID: 510442432}
+  wallRight: {fileID: 362453264}
+  wallTop: {fileID: 357587598}
+  wallBottom: {fileID: 588291521}
 --- !u!4 &1175149232
 Transform:
   m_ObjectHideFlags: 0

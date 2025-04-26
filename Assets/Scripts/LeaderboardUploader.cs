@@ -33,7 +33,6 @@ public class LeaderboardUploader : MonoBehaviour
         {
             Debug.Log("? Score uploaded successfully");
 
-            // Refresh leaderboard from server
             LeaderboardManager leaderboardManager = FindObjectOfType<LeaderboardManager>();
             if (leaderboardManager != null)
             {
@@ -49,7 +48,7 @@ public class LeaderboardUploader : MonoBehaviour
         public int user_id;
         public int total_score;
         public int time_taken;
-        public string level_name; // <<<<<< add this
+        public string level_name; 
     }
     }
 

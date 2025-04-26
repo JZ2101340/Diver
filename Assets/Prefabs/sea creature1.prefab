@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6661781429658014564}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 675.0938, y: 416.4648, z: 0}
+  m_LocalPosition: {x: 675.1011, y: 416.4429, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb649f0574b188429863e24041d0165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oxygenReduction: 20
+  oxygenReduction: 5
   moveSpeed: 2
   movementDirection: {x: 0, y: 0}
   changeDirectionInterval: 3

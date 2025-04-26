@@ -8,7 +8,7 @@ public class LeaderboardManager : MonoBehaviour
 {
     public Transform content;
     public GameObject leaderboardEntryPrefab;
-    private string serverBaseUrl = "http://localhost:3000/leaderboard"; // Base URL
+    private string serverBaseUrl = "http://localhost:3000/leaderboard"; 
 
     [System.Serializable]
     public class LeaderboardEntryData
@@ -27,7 +27,6 @@ public class LeaderboardManager : MonoBehaviour
 
     private void Start()
     {
-        // Load default leaderboard at start, for example Easy
         LoadLeaderboardForLevel("Easy");
     }
 

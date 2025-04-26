@@ -2,26 +2,38 @@ using UnityEngine;
 
 public class BoosterSpawner : MonoBehaviour
 {
-    //data below acts as model
-    public GameObject boosterPrefab; 
-    public float spawnInterval;
-    public int maxBoosters; 
-    public Vector2 spawnAreaMin, spawnAreaMax;
+    public GameObject boosterPrefab;
+    public float spawnInterval = 5f;
+    public Transform wallLeft;
+    public Transform wallRight;
+    public Transform wallTop;
+    public Transform wallBottom;
 
-    //start and spawnBooster functions below acts as controller
+    private float minX, maxX, minY, maxY;
 
     void Start()
     {
-        InvokeRepeating("SpawnBooster", 5f, spawnInterval);
+        CalculateSpawnArea();
+        InvokeRepeating(nameof(SpawnBooster), 5f, spawnInterval);
+    }
+
+    void CalculateSpawnArea()
+    {
+        float wallWidth = wallLeft.GetComponent<BoxCollider2D>().bounds.size.x;
+        float wallHeight = wallTop.GetComponent<BoxCollider2D>().bounds.size.y;
+
+        minX = wallLeft.position.x + wallWidth / 2f;
+        maxX = wallRight.position.x - wallWidth / 2f;
+        minY = wallBottom.position.y + wallHeight / 2f;
+        maxY = wallTop.position.y - wallHeight / 2f;
     }
 
     void SpawnBooster()
     {
-        Vector2 spawnPosition = new Vector2(
-            Random.Range(spawnAreaMin.x, spawnAreaMax.x),
-            Random.Range(spawnAreaMin.y, spawnAreaMax.y)
+        Vector2 spawnPos = new Vector2(
+            Random.Range(minX, maxX),
+            Random.Range(minY, maxY)
         );
-        Instantiate(boosterPrefab, spawnPosition, Quaternion.identity); // view, where boosters are instantiated 
+        Instantiate(boosterPrefab, spawnPos, Quaternion.identity);
     }
 }
-

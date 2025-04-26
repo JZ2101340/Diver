@@ -2,23 +2,23 @@ using UnityEngine;
 
 public class SeaCreature : MonoBehaviour
 {
-    public float oxygenReduction = 20f; // Oxygen lost when player touches
-    public float moveSpeed = 2f; // Speed of sea creature movement
-    public Vector2 movementDirection; // Random movement direction
-    public float changeDirectionInterval = 3f; // How often it changes direction
+    public float oxygenReduction = 5f; 
+    public float moveSpeed = 2f; 
+    public Vector2 movementDirection; 
+    public float changeDirectionInterval = 3f; 
 
     private Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0; // Prevent gravity affecting movement
+        rb.gravityScale = 0; 
         InvokeRepeating("ChangeDirection", 0f, changeDirectionInterval);
     }
 
     void Update()
     {
-        rb.velocity = movementDirection * moveSpeed; // Apply movement
+        rb.velocity = movementDirection * moveSpeed; 
     }
 
     private void ChangeDirection()

@@ -7,9 +7,7 @@ public class navigation : MonoBehaviour
 {
     public void LoadLevel(int num)
     {
-        SceneManager.LoadScene(num);// controller
+        SceneManager.LoadScene(num);
     }
     
 }
-// no model in this script
-// view is navigation button

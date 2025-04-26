@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb649f0574b188429863e24041d0165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oxygenReduction: 20
+  oxygenReduction: 5
   moveSpeed: 2
   movementDirection: {x: 0, y: 0}
   changeDirectionInterval: 3

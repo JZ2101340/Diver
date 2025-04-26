@@ -997,9 +997,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boosterPrefab: {fileID: 8781992256821108182, guid: 0ada114d47fd0eb4c8a5d81bfcadb1cd, type: 3}
   spawnInterval: 5
-  maxBoosters: 20
-  spawnAreaMin: {x: -8, y: -4}
-  spawnAreaMax: {x: 8, y: 4}
+  wallLeft: {fileID: 510442432}
+  wallRight: {fileID: 362453264}
+  wallTop: {fileID: 357587598}
+  wallBottom: {fileID: 588291521}
 --- !u!4 &332372142
 Transform:
   m_ObjectHideFlags: 0
@@ -1163,7 +1164,7 @@ Transform:
   m_GameObject: {fileID: 362453262}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.39478, y: 48.357708, z: -0.6457976}
+  m_LocalPosition: {x: 19, y: 40.6, z: -0.6457976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1683,7 +1684,7 @@ Transform:
   m_GameObject: {fileID: 510442430}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41.9, y: 48.357708, z: -0.6457976}
+  m_LocalPosition: {x: -41.9, y: 47, z: -0.6457976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2296,7 +2297,7 @@ Transform:
   m_GameObject: {fileID: 588291519}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7105676, w: 0.703629}
-  m_LocalPosition: {x: -23.1, y: -38.6, z: -0.6457976}
+  m_LocalPosition: {x: -28.1, y: -38.6, z: -0.6457976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2540,7 +2541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6260590103411429113, guid: d5d9e0f4e8465cd438d984a78714bfbc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.8
+      value: 15.9
       objectReference: {fileID: 0}
     - target: {fileID: 6260590103411429113, guid: d5d9e0f4e8465cd438d984a78714bfbc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3041,15 +3042,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seaCreaturePrefabs:
+  - {fileID: 3751956765968000565, guid: 0e2d584a438b70544a2c39156eb9a6e0, type: 3}
   - {fileID: 6616443936896978698, guid: 13d64a83fb36d9143afc4d6c2bff96b5, type: 3}
-  - {fileID: 8565426919105043431, guid: a7b28b53b38ab0c49bd13e50f5eb1333, type: 3}
-  - {fileID: 6098136500320498923, guid: 7315a128319ef9c4da5ec24290481288, type: 3}
-  - {fileID: 1616728260162746778, guid: 9d7efbce11e0b6a4a9d56890551c3cca, type: 3}
-  spawnAreaMin: {x: -40, y: -25}
-  spawnAreaMax: {x: 40, y: 25}
+  - {fileID: 6882463632854940556, guid: 2479e070b5673834aaca98f6db1d272f, type: 3}
+  - {fileID: 3710902377556567719, guid: a92cf418e9751e34f9b5eff8375eff8e, type: 3}
   numberOfCreatures: 4
   safeSpawnRadius: 3
   diverTransform: {fileID: 535924495}
+  wallLeft: {fileID: 510442432}
+  wallRight: {fileID: 362453264}
+  wallTop: {fileID: 357587598}
+  wallBottom: {fileID: 588291521}
 --- !u!4 &1175149232
 Transform:
   m_ObjectHideFlags: 0
