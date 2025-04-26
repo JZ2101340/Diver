@@ -5,27 +5,41 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
-    [Header("Score Display")]
+    [Header("UI")]
     public TMP_Text scoreText;
 
-    [Header("Score Weights")]
-    public float oxygenWeight = 2f;
-    public float timeWeight = 1f;
-
     private float oxygenLevel = 100f;
-    private float timeTaken = 0f;
     private int score = 0;
 
-    private void Awake()
+    void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
+
+    public bool shouldReset = false;
+
+    void Start()
+    {
+        if (shouldReset || PlayerPrefs.GetInt("restoreProgress", 0) == 0)
+            ResetScore();
+        else
+        {
+            score = PlayerPrefs.GetInt("totalScore", 0);
+            oxygenLevel = PlayerPrefs.GetInt("oxygenLevel", 100);
+            PlayerPrefs.SetInt("restoreProgress", 0);
+            Debug.Log("? Score and Oxygen restored.");
+        }
+
+        UpdateScoreDisplay();
+    }
+
 
     void Update()
     {
-        timeTaken += Time.deltaTime;
-        UpdateScoreDisplay();
+        UpdateScoreDisplay(); // ? Score live update
     }
 
     public void SetOxygenLevel(float level)
@@ -33,30 +47,28 @@ public class ScoreManager : MonoBehaviour
         oxygenLevel = level;
     }
 
-    public void ResetTimer()
-    {
-        timeTaken = 0f;
-    }
-
-    public void StopTimer()
-    {
-        enabled = false;
-    }
-
     public int CalculateScore()
     {
-        score = Mathf.RoundToInt(oxygenLevel * oxygenWeight + timeTaken * timeWeight);
+        if (TimerManager.Instance == null)
+            return score;
+
+        float time = TimerManager.Instance.GetTime();
+        score = Mathf.RoundToInt((oxygenLevel * 3f) + Mathf.Max(0, 300f - time));
         return score;
+    }
+
+    public void ResetScore()
+    {
+        score = 0;
+        oxygenLevel = 100f;
     }
 
     public void UpdateScoreDisplay()
     {
-        CalculateScore(); // Update score value
+        score = CalculateScore();
         if (scoreText != null)
             scoreText.text = "Score: " + score;
     }
 
     public int GetScore() => score;
-    public float GetTimeTaken() => timeTaken;
-    public float GetOxygenLevel() => oxygenLevel;
 }

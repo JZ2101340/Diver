@@ -1,35 +1,21 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CheckpointTrigger : MonoBehaviour
 {
-    public TMP_Text checkpointText; // Assigned in Inspector
-    public static int totalCheckpoints = 2; // Total number of checkpoints
-    public static int checkpointsReached = 0;
-    public static bool sceneLoaded = false;
+    private bool triggered = false;
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // When the player collides with a checkpoint
-        if (other.CompareTag("Player") && !sceneLoaded)
+        if (other.CompareTag("Player") && !triggered)
         {
-            checkpointsReached++;
-            gameObject.SetActive(false); // Disable this checkpoint after reaching it
+            triggered = true;
 
-            // Update the checkpoint UI if it’s assigned
-            if (checkpointText != null)
+            if (CheckpointManager.Instance != null)
             {
-                checkpointText.text = $"Checkpoints Reached: {checkpointsReached}/{totalCheckpoints}";
+                CheckpointManager.Instance.RegisterCheckpointHit();
             }
 
-            // If all checkpoints are reached, load the next level
-            if (checkpointsReached >= totalCheckpoints)
-            {
-                sceneLoaded = true;
-                Debug.Log("Game won!");
-                SceneManager.LoadScene("Medium"); // Replace with the correct scene name for the next level
-            }
+            gameObject.SetActive(false);
         }
     }
 }

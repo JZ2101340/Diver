@@ -1,70 +1,135 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class CheckpointManager : MonoBehaviour
 {
-    public Transform[] checkpoints;  // Assign in Inspector
+
+    [Header("Setup")]
+    public Transform[] checkpoints;            // ?? Assign all checkpoint GameObjects
+    public Transform player;                   // ?? Assign the Diver
+    public RectTransform compassArrow;         // ?? Assign the UI compass arrow
+    public TMP_Text checkpointText;            // ?? Assign the UI text
+
+    [Header("Checkpoint Settings")]
+    public int totalCheckpoints;               // ?? Set manually (or use checkpoints.Length)
+
+    private int reachedCheckpoints = 0;
     private int currentCheckpointIndex = 0;
 
-    public RectTransform compassArrow;
-    public Transform player;
+    public static CheckpointManager Instance;
 
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
+
+  
     void Start()
     {
-        // Initialize the first checkpoint
-        ActivateCheckpoint(0);
+        if (PlayerPrefs.GetInt("restoreProgress", 0) == 1)
+        {
+            int checkpointIndex = PlayerPrefs.GetInt("checkpointsReached", 0);
+            reachedCheckpoints = checkpointIndex;
+            currentCheckpointIndex = checkpointIndex;
+            Debug.Log("? Checkpoints Restored: " + reachedCheckpoints);
+        }
+
+        ActivateCheckpoint(currentCheckpointIndex);
+        UpdateCheckpointUI();
     }
+
+
 
     void Update()
     {
-        // If we haven't reached all checkpoints, update the compass
-        if (currentCheckpointIndex < checkpoints.Length)
+        UpdateCompass();
+    }
+
+    public void RegisterCheckpointHit()
+    {
+        reachedCheckpoints++;
+
+        currentCheckpointIndex++;
+        UpdateCheckpointUI();
+
+        if (reachedCheckpoints >= totalCheckpoints)
         {
-            UpdateCompass();
+            LoadNextScene();
+        }
+        else
+        {
+            ActivateCheckpoint(currentCheckpointIndex);
         }
     }
 
-    // Activates the specified checkpoint
+    void UpdateCheckpointUI()
+    {
+        if (checkpointText != null)
+        {
+            checkpointText.text = $"Checkpoints Reached:\n{reachedCheckpoints}/{totalCheckpoints}";
+        }
+    }
+
     void ActivateCheckpoint(int index)
     {
         for (int i = 0; i < checkpoints.Length; i++)
         {
-            // Only the current checkpoint is active
-            checkpoints[i].gameObject.SetActive(i == index);
+            checkpoints[i].gameObject.SetActive(i == index); // only next one active
         }
     }
 
-    // Updates the compass to point towards the next checkpoint
     void UpdateCompass()
     {
-        if (compassArrow != null && player != null)
-        {
-            // Direction from the player to the current checkpoint
-            Vector2 direction = checkpoints[currentCheckpointIndex].position - player.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (compassArrow == null || player == null || currentCheckpointIndex >= checkpoints.Length)
+            return;
 
-            // Smooth rotation of the compass arrow
-            Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-            compassArrow.rotation = Quaternion.Lerp(compassArrow.rotation, targetRotation, Time.deltaTime * 5f);
-        }
+        // Get direction in world space
+        Vector3 direction = checkpoints[currentCheckpointIndex].position - player.position;
+
+        // Convert to angle in Z (2D)
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Apply rotation on Z axis only
+        compassArrow.localRotation = Quaternion.Euler(0, 0, angle);
     }
 
-    // Called when the player reaches a checkpoint
-    public void CheckpointReached()
-    {
-        currentCheckpointIndex++;
 
-        // If there are more checkpoints, activate the next one
-        if (currentCheckpointIndex < checkpoints.Length)
+
+    void LoadNextScene()
+    {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
-            ActivateCheckpoint(currentCheckpointIndex);
+            // ? Reset score and timer for the next level
+            if (ScoreManager.Instance != null)
+                ScoreManager.Instance.shouldReset = true;
+
+            if (TimerManager.Instance != null)
+                TimerManager.Instance.shouldReset = true;
+
+            SceneManager.LoadScene(nextSceneIndex);
         }
         else
         {
-            // If all checkpoints are reached, the level is completed
-            Debug.Log("Level Completed!");
-            // Add any level transition logic here, such as loading the next scene
-            SceneManager.LoadScene("NextLevelScene");  // Replace with the correct next level name
+            Debug.Log("? All levels complete.");
         }
+    }
+
+    public void RestoreCheckpoint(int index)
+    {
+        currentCheckpointIndex = index;
+        reachedCheckpoints = index;
+        ActivateCheckpoint(currentCheckpointIndex);
+        UpdateCheckpointUI();
+    }
+
+    // Optional for other scripts
+    public int GetReachedCheckpointCount()
+    {
+        return reachedCheckpoints;
     }
 }

@@ -907,6 +907,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &341098141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 341098143}
+  - component: {fileID: 341098142}
+  m_Layer: 0
+  m_Name: ProgressManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &341098142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341098141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a73eba2a5b809e47b5ccfcbf7736de5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &341098143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341098141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -123.66654, y: 1500.1592, z: -9.479362}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &397374995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,8 +1699,10 @@ MonoBehaviour:
   - {fileID: 6260590103411429113, guid: d5d9e0f4e8465cd438d984a78714bfbc, type: 3}
   - {fileID: 744015241}
   - {fileID: 82225296}
-  compassArrow: {fileID: 1308241269}
   player: {fileID: 1270029737}
+  compassArrow: {fileID: 1308241269}
+  checkpointText: {fileID: 0}
+  totalCheckpoints: 0
 --- !u!1 &1165274027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,8 +1885,9 @@ MonoBehaviour:
   - {fileID: 1616728260162746778, guid: 9d7efbce11e0b6a4a9d56890551c3cca, type: 3}
   - {fileID: 3751956765968000565, guid: 0e2d584a438b70544a2c39156eb9a6e0, type: 3}
   - {fileID: 6661781429658014564, guid: b93abfb36b8aa904792896d92389b3bb, type: 3}
+  spawnAreaMin: {x: 0, y: 0}
+  spawnAreaMax: {x: 0, y: 0}
   numberOfCreatures: 6
-  minSpacing: 4
 --- !u!4 &1175149232
 Transform:
   m_ObjectHideFlags: 0
@@ -3287,3 +3334,4 @@ SceneRoots:
   - {fileID: 744015240}
   - {fileID: 82225295}
   - {fileID: 726111080}
+  - {fileID: 341098143}

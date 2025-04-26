@@ -259,8 +259,9 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Checkpoint"))
         {
-            FindObjectOfType<CheckpointManager>().CheckpointReached();
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
+            FindObjectOfType<CheckpointManager>().GetReachedCheckpointCount();
+            other.gameObject.SetActive(false);  // ? safer than destroy
 
             if (checkpointSound != null) checkpointSound.Play();
         }

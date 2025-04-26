@@ -7,17 +7,9 @@ public class navigation : MonoBehaviour
 {
     public void LoadLevel(int num)
     {
-        SceneManager.LoadScene(num);
+        SceneManager.LoadScene(num);// controller
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
+// no model in this script
+// view is navigation button

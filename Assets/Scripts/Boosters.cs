@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class Booster : MonoBehaviour
 {
-    public float oxygenAmount = 100f; // How much oxygen this gives
-
-    private void OnTriggerEnter2D(Collider2D other)
+    public float oxygenAmount = 100f; // model
+    private void OnTriggerEnter2D(Collider2D other) //controller
     {
         if (other.CompareTag("Player"))
         {
@@ -12,8 +11,9 @@ public class Booster : MonoBehaviour
             if (oxygenManager != null)
             {
                 oxygenManager.IncreaseOxygen(oxygenAmount);
-                Destroy(gameObject); // Remove booster after pickup
+                Destroy(gameObject); 
             }
         }
     }
 }
+// for booster view is the UI booster itself

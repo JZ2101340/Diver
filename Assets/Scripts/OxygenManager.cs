@@ -4,59 +4,80 @@ using UnityEngine.SceneManagement;
 
 public class OxygenManager : MonoBehaviour
 {
-    public Slider oxygenSlider; // Reference to the oxygen slider UI
-    public float oxygenDecreaseRate; // Rate at which oxygen decreases over time
-    public float oxygenLostPerCreatureHit; // Amount of oxygen lost per creature hit
-    private float maxOxygen = 100f; // Maximum oxygen level
-    private float currentOxygen; // Current oxygen level
+    public static OxygenManager Instance;
 
-    public GameObject gameOverPanel; // Game over UI panel
-    public Button retryButton; // Button for retrying the game
-    public Button quitButton; // Button for quitting to the main menu
-    public static OxygenManager Instance; // Singleton instance for easy access
+    public Slider oxygenSlider;
+    public float oxygenDecreaseRate;
+    public GameObject gameOverPanel;
+    public Button retryButton;
+    public Button quitButton;
+
+    private float maxOxygen = 100f;
+    private float currentOxygen;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
     void Start()
     {
-        currentOxygen = maxOxygen; // Set the initial oxygen level
-        oxygenSlider.maxValue = maxOxygen; // Set the slider's max value
-        oxygenSlider.value = currentOxygen; // Initialize the slider with the current oxygen level
+        if (PlayerPrefs.GetInt("restoreProgress", 0) == 1)
+        {
+            float restoredOxygen = PlayerPrefs.GetInt("oxygenLevel", 100);
+            currentOxygen = restoredOxygen;
+            Debug.Log("??? Restored oxygen: " + currentOxygen);
+        }
+        else
+        {
+            currentOxygen = maxOxygen;
+            Debug.Log("??? New game, oxygen reset to: " + currentOxygen);
+        }
 
-        gameOverPanel.SetActive(false); // Hide the game over panel at the start
+        oxygenSlider.maxValue = maxOxygen;
+        oxygenSlider.value = currentOxygen;
 
-        // Assign button actions
+        // ? Reset timescale on level start
+        Time.timeScale = 1f;
+
+        // ? Hook up buttons
         retryButton.onClick.AddListener(RestartGame);
         quitButton.onClick.AddListener(QuitToMainMenu);
+
+        gameOverPanel.SetActive(false);
     }
+
+
 
     void Update()
     {
-        // Decrease oxygen over time
         currentOxygen -= oxygenDecreaseRate * Time.deltaTime;
-        currentOxygen = Mathf.Max(0f, currentOxygen); // Prevent oxygen from going below 0
+        currentOxygen = Mathf.Max(0f, currentOxygen);
         oxygenSlider.value = currentOxygen;
 
-        // Trigger Game Over if oxygen reaches 0
+        ScoreManager.Instance.SetOxygenLevel(currentOxygen); // ? Ensure real-time score updates
+
         if (currentOxygen <= 0)
         {
             GameOver();
         }
     }
 
+
     public void IncreaseOxygen(float amount)
     {
-        // Increase oxygen and ensure it does not exceed the max value
         currentOxygen = Mathf.Min(currentOxygen + amount, maxOxygen);
         oxygenSlider.value = currentOxygen;
+        ScoreManager.Instance.SetOxygenLevel(currentOxygen);
     }
 
     public void DecreaseOxygen(float amount)
     {
-        // Decrease oxygen and ensure it does not go below 0
-        currentOxygen -= amount;
-        currentOxygen = Mathf.Max(0f, currentOxygen);
+        currentOxygen = Mathf.Max(0f, currentOxygen - amount);
         oxygenSlider.value = currentOxygen;
+        ScoreManager.Instance.SetOxygenLevel(currentOxygen);
 
-        // Trigger Game Over if oxygen reaches 0
         if (currentOxygen <= 0)
         {
             GameOver();
@@ -65,23 +86,51 @@ public class OxygenManager : MonoBehaviour
 
     void GameOver()
     {
-        // Handle game over logic
-        Debug.Log("Player Ran Out of Oxygen! Game Over.");
-        gameOverPanel.SetActive(true); // Show the game over UI panel
-        Time.timeScale = 0f; // Pause the game
+        Debug.Log("?? Game Over");
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f; // ? Freeze the game
+        SaveFinalProgress();
+
     }
+
+
+
+    void SaveFinalProgress()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (NetworkManager.Instance != null &&
+            System.Array.Exists(NetworkManager.levelScenes, scene => scene == currentScene))
+        {
+            NetworkManager.Instance.StartCoroutine(
+                NetworkManager.Instance.UpdateProgress(
+                    currentScene,
+                    Mathf.FloorToInt(currentOxygen),
+                    Mathf.FloorToInt(TimerManager.Instance.GetTime()),
+                    CheckpointManager.Instance.GetReachedCheckpointCount(),
+                    ScoreManager.Instance.GetScore()
+                )
+            );
+        }
+    }
+
 
     public void RestartGame()
     {
-        // Restart the current scene to retry the game
-        Time.timeScale = 1f; // Resume the game time
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload the current scene
+        Debug.Log("?? Restarting level");
+        Time.timeScale = 1f; // ? Unpause time
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+       
+                                             
     }
 
     void QuitToMainMenu()
     {
-        // Quit to the main menu
-        Time.timeScale = 1f; // Resume game time before quitting
-        SceneManager.LoadScene("Main menu (login)"); // Make sure the scene name is correct
+        Debug.Log("?? Going to main menu");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Main menu (login)"); // ? Replace with actual main menu name
     }
+
+
+    public float GetOxygenLevel() => currentOxygen;
 }

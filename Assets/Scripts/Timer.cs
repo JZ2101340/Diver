@@ -1,30 +1,64 @@
 using UnityEngine;
 using TMPro;
 
-public class Timer : MonoBehaviour
+public class TimerManager : MonoBehaviour
 {
-    public static Timer Instance;
+    public static TimerManager Instance;
 
     public TMP_Text timerText;
-    private float timer = 0f;
+    public float timeElapsed = 0f;
     private bool isRunning = true;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
 
-    private void Update()
+    public bool shouldReset = false;
+
+    void Start()
+    {
+        if (shouldReset || PlayerPrefs.GetInt("restoreProgress", 0) == 0)
+            ResetTimer();
+        else
+        {
+            timeElapsed = PlayerPrefs.GetInt("timeTaken", 0);
+            Debug.Log("? Timer Restored: " + timeElapsed);
+        }
+    }
+
+
+
+    void Update()
     {
         if (!isRunning) return;
 
-        timer += Time.deltaTime;
-        int minutes = Mathf.FloorToInt(timer / 60);
-        int seconds = Mathf.FloorToInt(timer % 60);
+        timeElapsed += Time.deltaTime;
+        UpdateTimerUI();
+    }
+
+    void UpdateTimerUI()
+    {
+        if (timerText == null) return;
+
+        int minutes = Mathf.FloorToInt(timeElapsed / 60f);
+        int seconds = Mathf.FloorToInt(timeElapsed % 60f);
         timerText.text = $"Time: {minutes:00}:{seconds:00}";
+    }
+    public void ResetTimer()
+    {
+        timeElapsed = 0f;
+        UpdateTimerUI();
+    }
+
+    public void SetTime(float time)
+    {
+        timeElapsed = time;
+        UpdateTimerUI();
     }
 
     public void StopTimer() => isRunning = false;
-    public float GetTime() => timer;
+
+    public float GetTime() => timeElapsed;
 }

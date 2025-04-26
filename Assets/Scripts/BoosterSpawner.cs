@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class BoosterSpawner : MonoBehaviour
 {
-    public GameObject boosterPrefab;
+    //data below acts as model
+    public GameObject boosterPrefab; 
     public float spawnInterval;
-    public int maxBoosters; // Number of boosters to spawn
+    public int maxBoosters; 
     public Vector2 spawnAreaMin, spawnAreaMax;
+
+    //start and spawnBooster functions below acts as controller
 
     void Start()
     {
@@ -18,6 +21,7 @@ public class BoosterSpawner : MonoBehaviour
             Random.Range(spawnAreaMin.x, spawnAreaMax.x),
             Random.Range(spawnAreaMin.y, spawnAreaMax.y)
         );
-        Instantiate(boosterPrefab, spawnPosition, Quaternion.identity);
+        Instantiate(boosterPrefab, spawnPosition, Quaternion.identity); // view, where boosters are instantiated 
     }
 }
+
