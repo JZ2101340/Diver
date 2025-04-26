@@ -27,6 +27,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Medium.unity
     guid: acdb080f39c0d924f8629be1828f685e
   - enabled: 1
+    path: Assets/Scenes/Hard.unity
+    guid: cf1366f32701f85438bf55e4ab4d15f7
+  - enabled: 1
+    path: Assets/Scenes/Very Hard.unity
+    guid: 677155c34c081a049bb7fa20deecd409
+  - enabled: 1
     path: Assets/Scenes/Leaderboard.unity
     guid: 5849c25684400ae46a31ecf62805a017
   m_configObjects:
