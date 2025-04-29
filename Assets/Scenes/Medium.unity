@@ -302,7 +302,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b3cdcae8797f1884581f0986364761d9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2d2de2cec8a98b47bf1eea3e61d0416, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -322,8 +322,8 @@ Transform:
   m_GameObject: {fileID: 104411444}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2990.8271, y: 1961.6733, z: 0}
-  m_LocalScale: {x: 1158.962, y: 1062.5131, z: 949.5013}
+  m_LocalPosition: {x: 11.8, y: -3.7654, z: 0}
+  m_LocalScale: {x: 4, y: 6.5059123, z: 949}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -996,7 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boosterPrefab: {fileID: 8781992256821108182, guid: 0ada114d47fd0eb4c8a5d81bfcadb1cd, type: 3}
-  spawnInterval: 5
+  numberOfBoosters: 15
   wallLeft: {fileID: 510442432}
   wallRight: {fileID: 362453264}
   wallTop: {fileID: 357587598}
@@ -1087,7 +1087,7 @@ Transform:
   m_GameObject: {fileID: 357587596}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7105676, w: 0.703629}
-  m_LocalPosition: {x: -23.6, y: 13.5, z: -0.6457976}
+  m_LocalPosition: {x: -23.4, y: -10.5, z: -0.6457976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1164,7 +1164,7 @@ Transform:
   m_GameObject: {fileID: 362453262}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.39478, y: 48.357708, z: -0.6457976}
+  m_LocalPosition: {x: 26.4, y: 48.357708, z: -0.6457976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1684,7 +1684,7 @@ Transform:
   m_GameObject: {fileID: 510442430}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41.9, y: 48.357708, z: -0.6457976}
+  m_LocalPosition: {x: -41.3, y: 48.357708, z: -0.6457976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2297,7 +2297,7 @@ Transform:
   m_GameObject: {fileID: 588291519}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7105676, w: 0.703629}
-  m_LocalPosition: {x: -23.1, y: -38.6, z: -0.6457976}
+  m_LocalPosition: {x: -23.1, y: -35.5, z: -0.6457976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2958,7 +2958,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

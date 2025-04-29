@@ -82,12 +82,14 @@ public class CheckpointManager : MonoBehaviour
         if (compassArrow == null || player == null || currentCheckpointIndex >= checkpoints.Length)
             return;
 
-        Vector3 direction = checkpoints[currentCheckpointIndex].position - player.position;
-
+        Vector3 direction = (checkpoints[currentCheckpointIndex].position - player.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        compassArrow.localRotation = Quaternion.Euler(0, 0, angle);
+        compassArrow.localRotation = Quaternion.Euler(0, 0, angle - 90f);
+
     }
+
+
 
     void UploadFinalScoreAndLoadScene(int nextSceneIndex)
     {

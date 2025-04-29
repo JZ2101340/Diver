@@ -3,7 +3,7 @@ using UnityEngine;
 public class BoosterSpawner : MonoBehaviour
 {
     public GameObject boosterPrefab;
-    public float spawnInterval = 5f;
+    public int numberOfBoosters = 5; // Set this from the Inspector
     public Transform wallLeft;
     public Transform wallRight;
     public Transform wallTop;
@@ -14,7 +14,7 @@ public class BoosterSpawner : MonoBehaviour
     void Start()
     {
         CalculateSpawnArea();
-        InvokeRepeating(nameof(SpawnBooster), 5f, spawnInterval);
+        SpawnMultipleBoosters();
     }
 
     void CalculateSpawnArea()
@@ -26,6 +26,14 @@ public class BoosterSpawner : MonoBehaviour
         maxX = wallRight.position.x - wallWidth / 2f;
         minY = wallBottom.position.y + wallHeight / 2f;
         maxY = wallTop.position.y - wallHeight / 2f;
+    }
+
+    void SpawnMultipleBoosters()
+    {
+        for (int i = 0; i < numberOfBoosters; i++)
+        {
+            SpawnBooster();
+        }
     }
 
     void SpawnBooster()
