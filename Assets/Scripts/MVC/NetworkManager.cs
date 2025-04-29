@@ -299,8 +299,4 @@ public class NetworkManager : MonoBehaviour
             Debug.LogError("Cannot load scene: progress is null or currentLevel is empty.");
         }
     }
-
-
-
-
 }
