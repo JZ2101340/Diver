@@ -125,11 +125,7 @@ public class CheckpointManager : MonoBehaviour
         {
             UploadFinalScoreAndLoadScene(nextSceneIndex);
         }
-        else
-        {
-            Debug.Log(" All levels complete.");
-            
-        }
+        
     }
 
 

@@ -7,7 +7,7 @@ using System.Collections;
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager _instance;
-    private string serverUrl = "http://localhost:3000"; 
+    private string serverUrl = "http://localhost:3000";
     public TMP_InputField usernameInput;
     public TMP_InputField emailInput;
     public TMP_InputField passwordInput;
@@ -64,6 +64,8 @@ public class NetworkManager : MonoBehaviour
             DontDestroyOnLoad(gameObject); 
         }
     }
+    
+
     public void StartProgressSaving()
     {
         StartCoroutine(UpdateProgressPeriodically());
@@ -87,7 +89,7 @@ public class NetworkManager : MonoBehaviour
 
     private IEnumerator LoginUser(string email, string password)
     {
-        string url = "http://localhost:3000/login";
+        string url = serverUrl + "/login";
         string jsonData = $"{{\"email\":\"{email}\", \"password\":\"{password}\"}}";
 
         using (UnityWebRequest www = new UnityWebRequest(url, "POST"))
@@ -142,6 +144,7 @@ public class NetworkManager : MonoBehaviour
     public IEnumerator RegisterUser(string username, string email, string password, System.Action<string> callback)
     {
         string jsonData = $"{{\"username\":\"{username}\", \"email\":\"{email}\", \"password\":\"{password}\"}}";
+
 
         using (UnityWebRequest request = new UnityWebRequest(serverUrl + "/register", "POST"))
         {

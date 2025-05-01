@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8781992256821108182}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.006083356, w: 0.9999816}
   m_LocalPosition: {x: 498.7226, y: 638.1699, z: 0}
   m_LocalScale: {x: 0.4645, y: 0.5154, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.697}
 --- !u!212 &2892704780672776276
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7cb7de2d5e9054d96d4fc36ab63de0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oxygenAmount: 100
 --- !u!70 &7383172135847979485
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -128,9 +127,9 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2.25, y: 2.25}
+  m_Offset: {x: -0.15697272, y: -0.032023214}
+  m_Size: {x: 2.5639424, y: 2.3140447}
   m_Direction: 0

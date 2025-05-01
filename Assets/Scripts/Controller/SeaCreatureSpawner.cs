@@ -4,31 +4,30 @@ public class SeaCreatureSpawner : MonoBehaviour
 {
     public GameObject[] seaCreaturePrefabs;
     public int numberOfCreatures;
-    public float safeSpawnRadius = 2f;
+    public float safeSpawnRadius = 3f;
     public Transform diverTransform;
 
-    public Transform wallLeft;
-    public Transform wallRight;
-    public Transform wallTop;
-    public Transform wallBottom;
-
-    private float minX, maxX, minY, maxY;
+    public BoxCollider2D topCollider;
+    public BoxCollider2D bottomCollider;
+    public BoxCollider2D leftCollider;
+    public BoxCollider2D rightCollider;
 
     void Start()
     {
-        CalculateSpawnArea();
         SpawnCreatures();
     }
 
-    void CalculateSpawnArea()
+    Vector2 GetRandomSpawnPosition()
     {
-        float wallWidth = wallLeft.GetComponent<BoxCollider2D>().bounds.size.x;
-        float wallHeight = wallTop.GetComponent<BoxCollider2D>().bounds.size.y;
+        float left = leftCollider.bounds.max.x;
+        float right = rightCollider.bounds.min.x;
+        float top = topCollider.bounds.min.y;
+        float bottom = bottomCollider.bounds.max.y;
 
-        minX = wallLeft.position.x + wallWidth / 2f;
-        maxX = wallRight.position.x - wallWidth / 2f;
-        minY = wallBottom.position.y + wallHeight / 2f;
-        maxY = wallTop.position.y - wallHeight / 2f;
+        float x = Random.Range(left, right);
+        float y = Random.Range(bottom, top);
+
+        return new Vector2(x, y);
     }
 
     void SpawnCreatures()
@@ -42,11 +41,7 @@ public class SeaCreatureSpawner : MonoBehaviour
 
             do
             {
-                spawnPosition = new Vector2(
-                    Random.Range(minX, maxX),
-                    Random.Range(minY, maxY)
-                );
-
+                spawnPosition = GetRandomSpawnPosition();
                 validPosition = CheckValidSpawn(spawnPosition);
                 attempts++;
             } while (!validPosition && attempts < maxAttempts);
